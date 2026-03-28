@@ -1,4 +1,4 @@
-import { adminClient, multiSessionClient, magicLinkClient } from "better-auth/client/plugins";
+import { adminClient, multiSessionClient, magicLinkClient, organizationClient } from "better-auth/client/plugins";
 import { stripeClient } from "@better-auth/stripe/client";
 import { createAuthClient } from "better-auth/react"
 import { toast } from "sonner";
@@ -8,6 +8,7 @@ export const authClient = createAuthClient({
     baseURL: process.env.BETTER_AUTH_URL,
     plugins: [
         adminClient(),
+        organizationClient(),
         multiSessionClient(),
         magicLinkClient(),
         stripeClient({

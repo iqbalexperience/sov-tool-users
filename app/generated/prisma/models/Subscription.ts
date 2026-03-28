@@ -52,6 +52,8 @@ export type SubscriptionMinAggregateOutputType = {
   seats: number | null
   trialStart: Date | null
   trialEnd: Date | null
+  billingInterval: string | null
+  stripeScheduleId: string | null
 }
 
 export type SubscriptionMaxAggregateOutputType = {
@@ -72,6 +74,8 @@ export type SubscriptionMaxAggregateOutputType = {
   seats: number | null
   trialStart: Date | null
   trialEnd: Date | null
+  billingInterval: string | null
+  stripeScheduleId: string | null
 }
 
 export type SubscriptionCountAggregateOutputType = {
@@ -92,6 +96,8 @@ export type SubscriptionCountAggregateOutputType = {
   seats: number
   trialStart: number
   trialEnd: number
+  billingInterval: number
+  stripeScheduleId: number
   _all: number
 }
 
@@ -122,6 +128,8 @@ export type SubscriptionMinAggregateInputType = {
   seats?: true
   trialStart?: true
   trialEnd?: true
+  billingInterval?: true
+  stripeScheduleId?: true
 }
 
 export type SubscriptionMaxAggregateInputType = {
@@ -142,6 +150,8 @@ export type SubscriptionMaxAggregateInputType = {
   seats?: true
   trialStart?: true
   trialEnd?: true
+  billingInterval?: true
+  stripeScheduleId?: true
 }
 
 export type SubscriptionCountAggregateInputType = {
@@ -162,6 +172,8 @@ export type SubscriptionCountAggregateInputType = {
   seats?: true
   trialStart?: true
   trialEnd?: true
+  billingInterval?: true
+  stripeScheduleId?: true
   _all?: true
 }
 
@@ -269,6 +281,8 @@ export type SubscriptionGroupByOutputType = {
   seats: number | null
   trialStart: Date | null
   trialEnd: Date | null
+  billingInterval: string | null
+  stripeScheduleId: string | null
   _count: SubscriptionCountAggregateOutputType | null
   _avg: SubscriptionAvgAggregateOutputType | null
   _sum: SubscriptionSumAggregateOutputType | null
@@ -312,6 +326,8 @@ export type SubscriptionWhereInput = {
   seats?: Prisma.IntNullableFilter<"Subscription"> | number | null
   trialStart?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null
   trialEnd?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null
+  billingInterval?: Prisma.StringNullableFilter<"Subscription"> | string | null
+  stripeScheduleId?: Prisma.StringNullableFilter<"Subscription"> | string | null
 }
 
 export type SubscriptionOrderByWithRelationInput = {
@@ -332,6 +348,8 @@ export type SubscriptionOrderByWithRelationInput = {
   seats?: Prisma.SortOrderInput | Prisma.SortOrder
   trialStart?: Prisma.SortOrderInput | Prisma.SortOrder
   trialEnd?: Prisma.SortOrderInput | Prisma.SortOrder
+  billingInterval?: Prisma.SortOrderInput | Prisma.SortOrder
+  stripeScheduleId?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
@@ -355,6 +373,8 @@ export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
   seats?: Prisma.IntNullableFilter<"Subscription"> | number | null
   trialStart?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null
   trialEnd?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null
+  billingInterval?: Prisma.StringNullableFilter<"Subscription"> | string | null
+  stripeScheduleId?: Prisma.StringNullableFilter<"Subscription"> | string | null
 }, "id">
 
 export type SubscriptionOrderByWithAggregationInput = {
@@ -375,6 +395,8 @@ export type SubscriptionOrderByWithAggregationInput = {
   seats?: Prisma.SortOrderInput | Prisma.SortOrder
   trialStart?: Prisma.SortOrderInput | Prisma.SortOrder
   trialEnd?: Prisma.SortOrderInput | Prisma.SortOrder
+  billingInterval?: Prisma.SortOrderInput | Prisma.SortOrder
+  stripeScheduleId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SubscriptionCountOrderByAggregateInput
   _avg?: Prisma.SubscriptionAvgOrderByAggregateInput
   _max?: Prisma.SubscriptionMaxOrderByAggregateInput
@@ -403,6 +425,8 @@ export type SubscriptionScalarWhereWithAggregatesInput = {
   seats?: Prisma.IntNullableWithAggregatesFilter<"Subscription"> | number | null
   trialStart?: Prisma.DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null
   trialEnd?: Prisma.DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null
+  billingInterval?: Prisma.StringNullableWithAggregatesFilter<"Subscription"> | string | null
+  stripeScheduleId?: Prisma.StringNullableWithAggregatesFilter<"Subscription"> | string | null
 }
 
 export type SubscriptionCreateInput = {
@@ -423,6 +447,8 @@ export type SubscriptionCreateInput = {
   seats?: number | null
   trialStart?: Date | string | null
   trialEnd?: Date | string | null
+  billingInterval?: string | null
+  stripeScheduleId?: string | null
 }
 
 export type SubscriptionUncheckedCreateInput = {
@@ -443,6 +469,8 @@ export type SubscriptionUncheckedCreateInput = {
   seats?: number | null
   trialStart?: Date | string | null
   trialEnd?: Date | string | null
+  billingInterval?: string | null
+  stripeScheduleId?: string | null
 }
 
 export type SubscriptionUpdateInput = {
@@ -463,6 +491,8 @@ export type SubscriptionUpdateInput = {
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   trialStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trialEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  billingInterval?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeScheduleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubscriptionUncheckedUpdateInput = {
@@ -483,6 +513,8 @@ export type SubscriptionUncheckedUpdateInput = {
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   trialStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trialEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  billingInterval?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeScheduleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubscriptionCreateManyInput = {
@@ -503,6 +535,8 @@ export type SubscriptionCreateManyInput = {
   seats?: number | null
   trialStart?: Date | string | null
   trialEnd?: Date | string | null
+  billingInterval?: string | null
+  stripeScheduleId?: string | null
 }
 
 export type SubscriptionUpdateManyMutationInput = {
@@ -523,6 +557,8 @@ export type SubscriptionUpdateManyMutationInput = {
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   trialStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trialEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  billingInterval?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeScheduleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubscriptionUncheckedUpdateManyInput = {
@@ -543,6 +579,8 @@ export type SubscriptionUncheckedUpdateManyInput = {
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   trialStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trialEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  billingInterval?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeScheduleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubscriptionCountOrderByAggregateInput = {
@@ -563,6 +601,8 @@ export type SubscriptionCountOrderByAggregateInput = {
   seats?: Prisma.SortOrder
   trialStart?: Prisma.SortOrder
   trialEnd?: Prisma.SortOrder
+  billingInterval?: Prisma.SortOrder
+  stripeScheduleId?: Prisma.SortOrder
 }
 
 export type SubscriptionAvgOrderByAggregateInput = {
@@ -587,6 +627,8 @@ export type SubscriptionMaxOrderByAggregateInput = {
   seats?: Prisma.SortOrder
   trialStart?: Prisma.SortOrder
   trialEnd?: Prisma.SortOrder
+  billingInterval?: Prisma.SortOrder
+  stripeScheduleId?: Prisma.SortOrder
 }
 
 export type SubscriptionMinOrderByAggregateInput = {
@@ -607,6 +649,8 @@ export type SubscriptionMinOrderByAggregateInput = {
   seats?: Prisma.SortOrder
   trialStart?: Prisma.SortOrder
   trialEnd?: Prisma.SortOrder
+  billingInterval?: Prisma.SortOrder
+  stripeScheduleId?: Prisma.SortOrder
 }
 
 export type SubscriptionSumOrderByAggregateInput = {
@@ -641,6 +685,8 @@ export type SubscriptionSelect<ExtArgs extends runtime.Types.Extensions.Internal
   seats?: boolean
   trialStart?: boolean
   trialEnd?: boolean
+  billingInterval?: boolean
+  stripeScheduleId?: boolean
 }, ExtArgs["result"]["subscription"]>
 
 export type SubscriptionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -661,6 +707,8 @@ export type SubscriptionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   seats?: boolean
   trialStart?: boolean
   trialEnd?: boolean
+  billingInterval?: boolean
+  stripeScheduleId?: boolean
 }, ExtArgs["result"]["subscription"]>
 
 export type SubscriptionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -681,6 +729,8 @@ export type SubscriptionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   seats?: boolean
   trialStart?: boolean
   trialEnd?: boolean
+  billingInterval?: boolean
+  stripeScheduleId?: boolean
 }, ExtArgs["result"]["subscription"]>
 
 export type SubscriptionSelectScalar = {
@@ -701,9 +751,11 @@ export type SubscriptionSelectScalar = {
   seats?: boolean
   trialStart?: boolean
   trialEnd?: boolean
+  billingInterval?: boolean
+  stripeScheduleId?: boolean
 }
 
-export type SubscriptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"createdAt" | "updatedAt" | "id" | "plan" | "referenceId" | "stripeCustomerId" | "stripeSubscriptionId" | "status" | "periodStart" | "periodEnd" | "cancelAtPeriodEnd" | "cancelAt" | "canceledAt" | "endedAt" | "seats" | "trialStart" | "trialEnd", ExtArgs["result"]["subscription"]>
+export type SubscriptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"createdAt" | "updatedAt" | "id" | "plan" | "referenceId" | "stripeCustomerId" | "stripeSubscriptionId" | "status" | "periodStart" | "periodEnd" | "cancelAtPeriodEnd" | "cancelAt" | "canceledAt" | "endedAt" | "seats" | "trialStart" | "trialEnd" | "billingInterval" | "stripeScheduleId", ExtArgs["result"]["subscription"]>
 
 export type $SubscriptionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Subscription"
@@ -726,6 +778,8 @@ export type $SubscriptionPayload<ExtArgs extends runtime.Types.Extensions.Intern
     seats: number | null
     trialStart: Date | null
     trialEnd: Date | null
+    billingInterval: string | null
+    stripeScheduleId: string | null
   }, ExtArgs["result"]["subscription"]>
   composites: {}
 }
@@ -1166,6 +1220,8 @@ export interface SubscriptionFieldRefs {
   readonly seats: Prisma.FieldRef<"Subscription", 'Int'>
   readonly trialStart: Prisma.FieldRef<"Subscription", 'DateTime'>
   readonly trialEnd: Prisma.FieldRef<"Subscription", 'DateTime'>
+  readonly billingInterval: Prisma.FieldRef<"Subscription", 'String'>
+  readonly stripeScheduleId: Prisma.FieldRef<"Subscription", 'String'>
 }
     
 

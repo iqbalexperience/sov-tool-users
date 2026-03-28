@@ -1,4 +1,4 @@
 export const saasMeta = {
-    name: "SAAS Starter",
-    description: "Next.js + Better-auth + Stripe + Prisma + Postgres + Shadcn UI + Tailwind CSS",
+    name: "AI-SEO Tools",
+    description: "AI-Search Query Strategist",
 };

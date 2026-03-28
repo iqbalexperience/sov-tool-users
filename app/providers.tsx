@@ -28,6 +28,7 @@ export function Providers({ children }: { children: ReactNode }) {
             emailVerification
             deleteUser
             Link={Link}
+            organization={true}
         >
             {children}
         </AuthUIProvider>

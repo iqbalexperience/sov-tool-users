@@ -10,20 +10,24 @@ import { cn } from "@/lib/utils";
 import { UserButton } from "@daveyplate/better-auth-ui";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { NotificationPopover } from "@/components/notifications/NotificationPopover";
+import { saasMeta } from "@/lib/constants";
 
 export function Navbar() {
 
     return (
         <div className="flex flex-1 items-center justify-between gap-4">
-            <div className="flex-1" />
+            <div className="flex-1 flex items-center gap-2" >
+                <img src="/logo.png" alt="Logo" width={24} height={24} />
+                <p className="text-lg font-semibold">{saasMeta.name}</p>
+            </div>
             <div className="flex items-center gap-2">
                 <div className="hidden md:flex items-center gap-2 mr-2">
-                    <Link href="/subscription" className="flex items-center gap-1.5 px-3 py-1.5 rounded-md hover:bg-muted text-xs font-medium text-muted-foreground hover:text-foreground transition-colors">
+                    {/* <Link href="/subscription" className="flex items-center gap-1.5 px-3 py-1.5 rounded-md hover:bg-muted text-xs font-medium text-muted-foreground hover:text-foreground transition-colors">
                         <CreditCard size={14} />
                         Subscription
-                    </Link>
+                    </Link> */}
                     <ThemeToggle />
-                    <NotificationPopover />
+                    {/* <NotificationPopover /> */}
                 </div>
 
 

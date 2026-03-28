@@ -92,3 +92,18 @@ export type FeedbackNotificationEmail = Prisma.FeedbackNotificationEmailModel
  * 
  */
 export type Subscription = Prisma.SubscriptionModel
+/**
+ * Model Organization
+ * 
+ */
+export type Organization = Prisma.OrganizationModel
+/**
+ * Model Member
+ * 
+ */
+export type Member = Prisma.MemberModel
+/**
+ * Model Invitation
+ * 
+ */
+export type Invitation = Prisma.InvitationModel

@@ -143,3 +143,59 @@ export const magicLinkTemplate = ({ loginUrl }: { loginUrl: string }) =>
     buttonUrl: loginUrl,
     footer: "If you didn't request a magic link, you can safely ignore this email."
   })
+
+
+
+export const orgInvitationTemplate = ({ invitedByUsername, invitedByEmail, teamName, inviteLink }: any) => {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You're Invited to Join!</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f4f7fa; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+    <center style="width: 100%; table-layout: fixed; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
+        <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); overflow: hidden;">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                <tr>
+                    <td style="padding: 30px 0; text-align: center; background-color: #ffffff;">
+                        <img src="${process.env.BETTER_AUTH_URL + "/logo.png"}" alt="${saasMeta.name}" style="height: 40px; width: 40px; display: inline-block; vertical-align: middle; margin-right: 10px;">
+                        <span style="font-size: 24px; font-weight: 700; color: #333333; vertical-align: middle;">${saasMeta.name}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 0 40px 40px 40px; text-align: center;">
+                        <h1 style="font-size: 28px; color: #1a202c; margin-bottom: 20px; line-height: 1.3;">You're Invited to Join <strong style="color: #2563eb;">${teamName}</strong>!</h1>
+                        <p style="font-size: 16px; color: #4a5568; line-height: 1.6; margin-bottom: 25px;">
+                            Hello, you've been invited by <strong style="color: #333;">${invitedByUsername}</strong> (${invitedByEmail}) to join the <strong style="color: #333;">${teamName}</strong> organization on <strong style="color: #333;">${saasMeta.name}</strong>.
+                            <br><br>
+                            Click the button below to accept your invitation and get started on your journey with us.
+                        </p>
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td align="center" style="padding-bottom: 20px;">
+                                    <a href="${inviteLink}" style="background-color: #2563eb; color: #ffffff; padding: 14px 28px; border-radius: 6px; font-size: 18px; text-decoration: none; display: inline-block; font-weight: 600;">
+                                        Accept Invitation
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                        <p style="font-size: 14px; color: #718096; margin-top: 30px; line-height: 1.5;">
+                            If you have any questions, feel free to reply to this email or visit our help center.
+                            <br>
+                            Thanks,<br>
+                            The ${saasMeta.name} Team
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 20px 40px; text-align: center; font-size: 12px; color: #a0aec0; background-color: #f7fafc; border-top: 1px solid #edf2f7;">
+                        &copy; 2025 ${saasMeta.name}. All rights reserved.
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </center>
+</body>
+</html>`}

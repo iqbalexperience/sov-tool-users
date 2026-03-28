@@ -1,11 +1,11 @@
 import { betterAuth } from "better-auth";
-import { admin, magicLink } from "better-auth/plugins";
+import { admin, magicLink, organization } from "better-auth/plugins";
 import { stripe } from "@better-auth/stripe"
 import Stripe from "stripe";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import prisma from "./prisma";
 import { sendEmail } from "./email";
-import { emailVerificationTemplate, resetPasswordTemplate, magicLinkTemplate } from "./email-templates";
+import { emailVerificationTemplate, resetPasswordTemplate, magicLinkTemplate, orgInvitationTemplate } from "./email-templates";
 import { saasMeta } from "./constants";
 
 const stripeClient = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -70,6 +70,45 @@ export const auth = betterAuth({
     },
     plugins: [
         admin(),
+
+        organization({
+            allowUserToCreateOrganization: async (user) => {
+                console.log(user)
+                if (user.role === "admin") {
+                    return true
+                } else {
+                    const isOrg = await prisma.member.findFirst({
+                        where: {
+                            userId: user.id,
+                            role: "owner"
+                        },
+                        select: {
+                            id: true
+                        }
+                    })
+                    if (isOrg) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+            },
+            async sendInvitationEmail(data) {
+                console.log(data.id)
+                const inviteLink = `${process.env.BETTER_AUTH_URL}/auth/accept-invitation?invitationId=${data.id}`
+                await sendEmail({
+                    to: data.email,
+                    subject: `${saasMeta.name} | Invitation`,
+                    body: orgInvitationTemplate({
+                        invitedByUsername: data.inviter.user.name,
+                        invitedByEmail: data.inviter.user.email,
+                        teamName: data.organization.name,
+                        inviteLink
+                    }),
+                });
+            },
+            membershipLimit: 1000,
+        }),
         magicLink({
             sendMagicLink: async ({ email, url }) => {
                 await sendEmail({
@@ -133,7 +172,7 @@ export const getActivePlanServer = async () => {
 
 export const gateWithPlanServer = async (planName: string) => {
     const userPlan = await getActivePlanServer();
-    
+
     const planHierarchy: Record<string, number> = {
         "free": 0,
         "plus": 1,
