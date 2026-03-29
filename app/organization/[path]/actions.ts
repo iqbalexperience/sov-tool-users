@@ -122,20 +122,9 @@ export async function updateProjectMembersAction(clientId: string, projectId: st
     }
 }
 
-export async function getProjectsWithCountsAction(orgClients: string[]) {
+export async function getProjectsWithCountsAction(orgClients: string[], isOrgAdmin: boolean, userProjects: string[]) {
     let clients: Client[] = [];
-    // try {
-    //     const res = await fetch(`${process.env.AI_SEO_URL}/api/db/clients/list/for-auth`, {
-    //         cache: 'no-store'
-    //     });
-    //     if (res.ok) {
-    //         clients = await res.json();
-    //     } else {
-    //         console.error("Failed to fetch clients.");
-    //     }
-    // } catch (error) {
-    //     console.error("Error fetching clients:", error);
-    // }
+    // console.log({ userProjects })
 
     const { rows: clients_1 } = await query(
         `SELECT c.id, c.name, c.domain, c.status,
@@ -149,35 +138,45 @@ export async function getProjectsWithCountsAction(orgClients: string[]) {
        GROUP BY c.id
        ORDER BY c.name`
     );
-    console.log(clients_1)
     clients = clients_1.filter((client: any) => orgClients.includes(client.id));
 
-
-    const memberProjectsCounts = await prisma.memberProjects.findMany({
-        where: {
-            clientId: { in: clients.map(c => c.id) }
-        },
-        select: {
-            clientId: true,
-            projectId: true,
-            _count: {
-                select: { member: true }
+    if (isOrgAdmin) {
+        const memberProjectsCounts = await prisma.memberProjects.findMany({
+            where: {
+                clientId: { in: clients.map(c => c.id) }
+            },
+            select: {
+                clientId: true,
+                projectId: true,
+                _count: {
+                    select: { member: true }
+                }
             }
-        }
-    });
+        });
 
-    const countMap = new Map();
-    memberProjectsCounts.forEach((mp) => {
-        countMap.set(`${mp.clientId}-${mp.projectId}`, mp._count.member);
-    });
+        const countMap = new Map();
+        memberProjectsCounts.forEach((mp) => {
+            countMap.set(`${mp.clientId}-${mp.projectId}`, mp._count.member);
+        });
 
-    return clients.map(client => ({
-        ...client,
-        projects: client.projects?.map(project => ({
-            ...project,
-            usersCount: countMap.get(`${client.id}-${project.id}`) || 0
-        })) || []
-    }));
+        return clients.map(client => ({
+            ...client,
+            projects: client.projects?.map(project => ({
+                ...project,
+                usersCount: countMap.get(`${client.id}-${project.id}`) || 0
+            })) || []
+        }));
+    } else {
+        return clients.map(client => ({
+            ...client,
+            projects: client.projects?.filter((project: any) => userProjects?.includes(project.id))?.map(project => ({
+                ...project,
+                usersCount: 1
+            })) || []
+        }));
+    }
+
+
 }
 
 export async function getOrganizationMembersAction(orgId: string) {
@@ -194,3 +193,23 @@ export async function getOrganizationMembersAction(orgId: string) {
     }));
 }
 
+export async function getClientsAction() {
+    try {
+        const { rows } = await query(
+            `SELECT c.id, c.name, c.domain, c.status, c.created_at, c.settings,
+                  COALESCE(json_agg(
+                    json_build_object(
+                      'id', p.id, 'name', p.name
+                    )
+                  ) FILTER (WHERE p.id IS NOT NULL), '[]') AS projects
+           FROM clients c
+           LEFT JOIN projects p ON p.client_id = c.id
+           GROUP BY c.id
+           ORDER BY c.name`
+        );
+        return rows;
+    } catch (error) {
+        console.error("Error fetching clients from DB:", error);
+        return [];
+    }
+}

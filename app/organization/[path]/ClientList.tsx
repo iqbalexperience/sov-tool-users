@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Globe, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { ClientLinkButton } from "./ClientLinkButton";
+import { getClientsAction } from "./actions";
 
 interface Client {
     id: string;
@@ -17,14 +18,36 @@ interface Client {
 }
 
 interface ClientListProps {
-    clients: Client[];
     org: any;
     orgId: string;
     isSuperAdmin: boolean;
 }
 
-export function ClientList({ clients, org, orgId, isSuperAdmin }: ClientListProps) {
+export function ClientList({ org, orgId, isSuperAdmin }: ClientListProps) {
+    const [clients, setClients] = useState<Client[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
+
+    React.useEffect(() => {
+        let isMounted = true;
+        async function fetchClients() {
+            try {
+                let fetchedClients = await getClientsAction();
+                if (!isSuperAdmin) {
+                    fetchedClients = fetchedClients?.filter((client: Client) => org?.clients?.includes(client.id));
+                }
+                if (isMounted) {
+                    setClients(fetchedClients || []);
+                }
+            } catch (error) {
+                console.error("Error fetching clients:", error);
+            } finally {
+                if (isMounted) setIsLoading(false);
+            }
+        }
+        fetchClients();
+        return () => { isMounted = false; };
+    }, [isSuperAdmin, org?.clients]);
 
     const filteredClients = clients.filter(client => {
         const query = searchQuery.toLowerCase();
@@ -53,7 +76,14 @@ export function ClientList({ clients, org, orgId, isSuperAdmin }: ClientListProp
                 </div>
             </CardHeader>
             <CardContent>
-                {filteredClients.length > 0 ? (
+                {isLoading ? (
+                    <div className="flex justify-center p-6 border rounded-xl bg-muted/20 border-dashed">
+                        <div className="flex flex-col items-center gap-2">
+                            <div className="h-6 w-6 animate-spin rounded-full border-b-2 border-primary"></div>
+                            <p className="text-sm text-muted-foreground">Loading clients...</p>
+                        </div>
+                    </div>
+                ) : filteredClients.length > 0 ? (
                     <div className="flex flex-col gap-4">
                         {filteredClients.map((client) => {
                             const isLinked = org?.clients?.includes(client.id);

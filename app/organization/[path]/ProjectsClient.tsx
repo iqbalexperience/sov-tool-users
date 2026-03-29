@@ -11,7 +11,7 @@ import type { Client } from "./ProjectsView";
 import { ProjectUsersDialog } from "./ProjectUsersDialog";
 import { getProjectsWithCountsAction, getOrganizationMembersAction } from "./actions";
 
-export default function ProjectsClient({ orgClients, orgId }: { orgClients: string[], orgId: string }) {
+export default function ProjectsClient({ userProjects, orgClients, orgId, isOrgAdmin }: { userProjects: string[], orgClients: string[], orgId: string, isOrgAdmin: boolean }) {
     const [searchQuery, setSearchQuery] = useState("");
     const [clients, setClients] = useState<Client[]>([]);
     const [organizationMembers, setOrganizationMembers] = useState<{ id: string; name: string; email: string; role: string }[]>([]);
@@ -19,8 +19,9 @@ export default function ProjectsClient({ orgClients, orgId }: { orgClients: stri
 
     useEffect(() => {
         setLoading(true);
+        // console.log({ userProjects })
         Promise.all([
-            getProjectsWithCountsAction(orgClients),
+            getProjectsWithCountsAction(orgClients, isOrgAdmin, userProjects),
             orgId ? getOrganizationMembersAction(orgId) : Promise.resolve([])
         ]).then(([clientsRes, membersRes]) => {
             setClients(clientsRes);
@@ -34,9 +35,13 @@ export default function ProjectsClient({ orgClients, orgId }: { orgClients: stri
 
     if (loading) {
         return (
-            <div className="flex flex-col items-center justify-center gap-3 w-full min-h-[50vh] text-muted-foreground">
-                <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                <p className="text-sm font-medium">Loading projects...</p>
+            <div className="flex flex-col gap-6 w-full">
+                <div className="flex justify-center p-6 border rounded-xl bg-muted/20 border-dashed">
+                    <div className="flex flex-col items-center gap-2">
+                        <div className="h-6 w-6 animate-spin rounded-full border-b-2 border-primary"></div>
+                        <p className="text-sm text-muted-foreground">Loading Projects...</p>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -142,11 +147,11 @@ export default function ProjectsClient({ orgClients, orgId }: { orgClients: stri
                                                 </Link>
 
                                                 {/* Action Button */}
-                                                <ProjectUsersDialog clientId={client.id} projectId={project.id} projectName={project.name} organizationMembers={organizationMembers}>
+                                                {isOrgAdmin && <ProjectUsersDialog clientId={client.id} projectId={project.id} projectName={project.name} organizationMembers={organizationMembers}>
                                                     <Button variant="outline" size="sm" className="rounded-lg h-9 px-4">
                                                         {project?.usersCount} Users
                                                     </Button>
-                                                </ProjectUsersDialog>
+                                                </ProjectUsersDialog>}
                                             </div>
                                         </div>
                                     ))}

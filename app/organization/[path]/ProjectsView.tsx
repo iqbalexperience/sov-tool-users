@@ -35,7 +35,7 @@ export default async function ProjectsView({ sessionData }: { sessionData: any }
     let org = null;
     if (!orgId) {
         const res = await auth.api.listOrganizations({ headers: await headers() })
-        console.log(res)
+        // console.log(res)
         const istOrg = res?.[0]?.id
         if (istOrg) {
             orgId = istOrg
@@ -65,11 +65,21 @@ export default async function ProjectsView({ sessionData }: { sessionData: any }
             userId: sessionData?.user?.id
         },
         select: {
-            role: true
+            role: true,
+            memberProjects: {
+                select: {
+                    clientId: true,
+                    projectId: true,
+                }
+            }
         }
     })
 
+    const userProjects = membership?.memberProjects.map((mp) => mp.projectId)
+    const userClients = membership?.memberProjects.map((mp) => mp.clientId)
+    // console.log(userProjects)
+
     const isOrgAdmin = membership?.role === "admin" || membership?.role === "owner" || sessionData?.user?.role === "admin"
 
-    return <ProjectsClient orgClients={org?.clients || []} orgId={orgId || ""} />;
+    return <ProjectsClient userProjects={userProjects || []} orgClients={isOrgAdmin ? org?.clients || [] : userClients || []} orgId={orgId || ""} isOrgAdmin={isOrgAdmin} />;
 }
