@@ -26,7 +26,7 @@ export function Navbar() {
                         <CreditCard size={14} />
                         Subscription
                     </Link> */}
-                    <ThemeToggle />
+                    {/* <ThemeToggle /> */}
                     {/* <NotificationPopover /> */}
                 </div>
 

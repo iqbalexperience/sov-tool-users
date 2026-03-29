@@ -70,28 +70,29 @@ export const auth = betterAuth({
     },
     plugins: [
         admin(),
-
         organization({
             allowUserToCreateOrganization: async (user) => {
                 console.log(user)
                 if (user.role === "admin") {
                     return true
-                } else {
-                    const isOrg = await prisma.member.findFirst({
-                        where: {
-                            userId: user.id,
-                            role: "owner"
-                        },
-                        select: {
-                            id: true
-                        }
-                    })
-                    if (isOrg) {
-                        return true
-                    } else {
-                        return false
-                    }
                 }
+                // else {
+                //     const isOrg = await prisma.member.findFirst({
+                //         where: {
+                //             userId: user.id,
+                //             role: "owner"
+                //         },
+                //         select: {
+                //             id: true
+                //         }
+                //     })
+                //     if (isOrg) {
+                //         return true
+                //     } else {
+                //         return false
+                //     }
+                // }
+                return false
             },
             async sendInvitationEmail(data) {
                 console.log(data.id)

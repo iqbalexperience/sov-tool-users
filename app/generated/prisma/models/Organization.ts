@@ -49,6 +49,7 @@ export type OrganizationCountAggregateOutputType = {
   logo: number
   createdAt: number
   metadata: number
+  clients: number
   _all: number
 }
 
@@ -78,6 +79,7 @@ export type OrganizationCountAggregateInputType = {
   logo?: true
   createdAt?: true
   metadata?: true
+  clients?: true
   _all?: true
 }
 
@@ -160,6 +162,7 @@ export type OrganizationGroupByOutputType = {
   logo: string | null
   createdAt: Date
   metadata: string | null
+  clients: string[]
   _count: OrganizationCountAggregateOutputType | null
   _min: OrganizationMinAggregateOutputType | null
   _max: OrganizationMaxAggregateOutputType | null
@@ -190,6 +193,7 @@ export type OrganizationWhereInput = {
   logo?: Prisma.StringNullableFilter<"Organization"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Organization"> | Date | string
   metadata?: Prisma.StringNullableFilter<"Organization"> | string | null
+  clients?: Prisma.StringNullableListFilter<"Organization">
   members?: Prisma.MemberListRelationFilter
   invitations?: Prisma.InvitationListRelationFilter
 }
@@ -201,6 +205,7 @@ export type OrganizationOrderByWithRelationInput = {
   logo?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   metadata?: Prisma.SortOrderInput | Prisma.SortOrder
+  clients?: Prisma.SortOrder
   members?: Prisma.MemberOrderByRelationAggregateInput
   invitations?: Prisma.InvitationOrderByRelationAggregateInput
 }
@@ -215,6 +220,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   logo?: Prisma.StringNullableFilter<"Organization"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Organization"> | Date | string
   metadata?: Prisma.StringNullableFilter<"Organization"> | string | null
+  clients?: Prisma.StringNullableListFilter<"Organization">
   members?: Prisma.MemberListRelationFilter
   invitations?: Prisma.InvitationListRelationFilter
 }, "id" | "slug">
@@ -226,6 +232,7 @@ export type OrganizationOrderByWithAggregationInput = {
   logo?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   metadata?: Prisma.SortOrderInput | Prisma.SortOrder
+  clients?: Prisma.SortOrder
   _count?: Prisma.OrganizationCountOrderByAggregateInput
   _max?: Prisma.OrganizationMaxOrderByAggregateInput
   _min?: Prisma.OrganizationMinOrderByAggregateInput
@@ -241,6 +248,7 @@ export type OrganizationScalarWhereWithAggregatesInput = {
   logo?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Organization"> | Date | string
   metadata?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  clients?: Prisma.StringNullableListFilter<"Organization">
 }
 
 export type OrganizationCreateInput = {
@@ -250,6 +258,7 @@ export type OrganizationCreateInput = {
   logo?: string | null
   createdAt: Date | string
   metadata?: string | null
+  clients?: Prisma.OrganizationCreateclientsInput | string[]
   members?: Prisma.MemberCreateNestedManyWithoutOrganizationInput
   invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
 }
@@ -261,6 +270,7 @@ export type OrganizationUncheckedCreateInput = {
   logo?: string | null
   createdAt: Date | string
   metadata?: string | null
+  clients?: Prisma.OrganizationCreateclientsInput | string[]
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutOrganizationInput
   invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -272,6 +282,7 @@ export type OrganizationUpdateInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clients?: Prisma.OrganizationUpdateclientsInput | string[]
   members?: Prisma.MemberUpdateManyWithoutOrganizationNestedInput
   invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
 }
@@ -283,6 +294,7 @@ export type OrganizationUncheckedUpdateInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clients?: Prisma.OrganizationUpdateclientsInput | string[]
   members?: Prisma.MemberUncheckedUpdateManyWithoutOrganizationNestedInput
   invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -294,6 +306,7 @@ export type OrganizationCreateManyInput = {
   logo?: string | null
   createdAt: Date | string
   metadata?: string | null
+  clients?: Prisma.OrganizationCreateclientsInput | string[]
 }
 
 export type OrganizationUpdateManyMutationInput = {
@@ -303,6 +316,7 @@ export type OrganizationUpdateManyMutationInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clients?: Prisma.OrganizationUpdateclientsInput | string[]
 }
 
 export type OrganizationUncheckedUpdateManyInput = {
@@ -312,6 +326,7 @@ export type OrganizationUncheckedUpdateManyInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clients?: Prisma.OrganizationUpdateclientsInput | string[]
 }
 
 export type OrganizationCountOrderByAggregateInput = {
@@ -321,6 +336,7 @@ export type OrganizationCountOrderByAggregateInput = {
   logo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
+  clients?: Prisma.SortOrder
 }
 
 export type OrganizationMaxOrderByAggregateInput = {
@@ -344,6 +360,15 @@ export type OrganizationMinOrderByAggregateInput = {
 export type OrganizationScalarRelationFilter = {
   is?: Prisma.OrganizationWhereInput
   isNot?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationCreateclientsInput = {
+  set: string[]
+}
+
+export type OrganizationUpdateclientsInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type OrganizationCreateNestedOneWithoutMembersInput = {
@@ -381,6 +406,7 @@ export type OrganizationCreateWithoutMembersInput = {
   logo?: string | null
   createdAt: Date | string
   metadata?: string | null
+  clients?: Prisma.OrganizationCreateclientsInput | string[]
   invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
 }
 
@@ -391,6 +417,7 @@ export type OrganizationUncheckedCreateWithoutMembersInput = {
   logo?: string | null
   createdAt: Date | string
   metadata?: string | null
+  clients?: Prisma.OrganizationCreateclientsInput | string[]
   invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -417,6 +444,7 @@ export type OrganizationUpdateWithoutMembersInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clients?: Prisma.OrganizationUpdateclientsInput | string[]
   invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -427,6 +455,7 @@ export type OrganizationUncheckedUpdateWithoutMembersInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clients?: Prisma.OrganizationUpdateclientsInput | string[]
   invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -437,6 +466,7 @@ export type OrganizationCreateWithoutInvitationsInput = {
   logo?: string | null
   createdAt: Date | string
   metadata?: string | null
+  clients?: Prisma.OrganizationCreateclientsInput | string[]
   members?: Prisma.MemberCreateNestedManyWithoutOrganizationInput
 }
 
@@ -447,6 +477,7 @@ export type OrganizationUncheckedCreateWithoutInvitationsInput = {
   logo?: string | null
   createdAt: Date | string
   metadata?: string | null
+  clients?: Prisma.OrganizationCreateclientsInput | string[]
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -473,6 +504,7 @@ export type OrganizationUpdateWithoutInvitationsInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clients?: Prisma.OrganizationUpdateclientsInput | string[]
   members?: Prisma.MemberUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -483,6 +515,7 @@ export type OrganizationUncheckedUpdateWithoutInvitationsInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clients?: Prisma.OrganizationUpdateclientsInput | string[]
   members?: Prisma.MemberUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -533,6 +566,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   logo?: boolean
   createdAt?: boolean
   metadata?: boolean
+  clients?: boolean
   members?: boolean | Prisma.Organization$membersArgs<ExtArgs>
   invitations?: boolean | Prisma.Organization$invitationsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
@@ -545,6 +579,7 @@ export type OrganizationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   logo?: boolean
   createdAt?: boolean
   metadata?: boolean
+  clients?: boolean
 }, ExtArgs["result"]["organization"]>
 
 export type OrganizationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -554,6 +589,7 @@ export type OrganizationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   logo?: boolean
   createdAt?: boolean
   metadata?: boolean
+  clients?: boolean
 }, ExtArgs["result"]["organization"]>
 
 export type OrganizationSelectScalar = {
@@ -563,9 +599,10 @@ export type OrganizationSelectScalar = {
   logo?: boolean
   createdAt?: boolean
   metadata?: boolean
+  clients?: boolean
 }
 
-export type OrganizationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "logo" | "createdAt" | "metadata", ExtArgs["result"]["organization"]>
+export type OrganizationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "logo" | "createdAt" | "metadata" | "clients", ExtArgs["result"]["organization"]>
 export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   members?: boolean | Prisma.Organization$membersArgs<ExtArgs>
   invitations?: boolean | Prisma.Organization$invitationsArgs<ExtArgs>
@@ -587,6 +624,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     logo: string | null
     createdAt: Date
     metadata: string | null
+    clients: string[]
   }, ExtArgs["result"]["organization"]>
   composites: {}
 }
@@ -1018,6 +1056,7 @@ export interface OrganizationFieldRefs {
   readonly logo: Prisma.FieldRef<"Organization", 'String'>
   readonly createdAt: Prisma.FieldRef<"Organization", 'DateTime'>
   readonly metadata: Prisma.FieldRef<"Organization", 'String'>
+  readonly clients: Prisma.FieldRef<"Organization", 'String[]'>
 }
     
 

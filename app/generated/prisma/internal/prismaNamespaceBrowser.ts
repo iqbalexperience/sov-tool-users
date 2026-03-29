@@ -68,6 +68,7 @@ export const ModelName = {
   Subscription: 'Subscription',
   Organization: 'Organization',
   Member: 'Member',
+  MemberProjects: 'MemberProjects',
   Invitation: 'Invitation'
 } as const
 
@@ -305,7 +306,8 @@ export const OrganizationScalarFieldEnum = {
   slug: 'slug',
   logo: 'logo',
   createdAt: 'createdAt',
-  metadata: 'metadata'
+  metadata: 'metadata',
+  clients: 'clients'
 } as const
 
 export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
@@ -320,6 +322,15 @@ export const MemberScalarFieldEnum = {
 } as const
 
 export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
+
+
+export const MemberProjectsScalarFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  projectId: 'projectId'
+} as const
+
+export type MemberProjectsScalarFieldEnum = (typeof MemberProjectsScalarFieldEnum)[keyof typeof MemberProjectsScalarFieldEnum]
 
 
 export const InvitationScalarFieldEnum = {

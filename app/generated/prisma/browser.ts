@@ -103,6 +103,11 @@ export type Organization = Prisma.OrganizationModel
  */
 export type Member = Prisma.MemberModel
 /**
+ * Model MemberProjects
+ * 
+ */
+export type MemberProjects = Prisma.MemberProjectsModel
+/**
  * Model Invitation
  * 
  */
