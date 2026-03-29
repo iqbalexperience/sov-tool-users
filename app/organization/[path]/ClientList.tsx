@@ -55,6 +55,12 @@ export function ClientList({ org, orgId, isSuperAdmin }: ClientListProps) {
             client.name?.toLowerCase().includes(query) ||
             client.domain?.toLowerCase().includes(query)
         );
+    }).sort((a, b) => {
+        const aLinked = org?.clients?.includes(a.id);
+        const bLinked = org?.clients?.includes(b.id);
+        if (aLinked && !bLinked) return -1;
+        if (!aLinked && bLinked) return 1;
+        return (a.name || '').localeCompare(b.name || '');
     });
 
     return (
