@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const allowedOrigins = ['http://localhost:3000'];
+const allowedOrigins = ['http://localhost:3000', "https://8ca8-180-149-219-117.ngrok-free.app", "https://aiseo.inboundcph.dk"];
 
 export function proxy(request: NextRequest) {
     const origin = request.headers.get('origin');
