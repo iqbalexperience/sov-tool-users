@@ -16,7 +16,7 @@ export const auth = betterAuth({
     database: prismaAdapter(prisma, {
         provider: "postgresql",
     }),
-    trustedOrigins: ["http://localhost:3000", ""],
+    trustedOrigins: ["http://localhost:3000", "https://aiseo.inboundcph.dk"],
     databaseHooks: {
         user: {
             create: {
@@ -151,10 +151,14 @@ export const auth = betterAuth({
         crossSubDomainCookies: {
             enabled: true,
         },
-        cookie: {
-            domain: process.env.NODE_ENV === "production" ? "railway.app" : undefined,
-            secure: process.env.NODE_ENV === "production",
-        }
+        cookies: {
+            state: {
+                attributes: {
+                    sameSite: 'none',
+                    secure: true,
+                },
+            },
+        },
     }
 });
 
