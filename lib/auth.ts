@@ -155,6 +155,9 @@ export const auth = betterAuth({
             secure: true,
             httpOnly: true,
         },
+    },
+    session: {
+        deferSessionRefresh: true
     }
 });
 
