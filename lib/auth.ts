@@ -16,7 +16,7 @@ export const auth = betterAuth({
     database: prismaAdapter(prisma, {
         provider: "postgresql",
     }),
-    trustedOrigins: ["http://localhost:3000"],
+    trustedOrigins: ["http://localhost:3000", ""],
     databaseHooks: {
         user: {
             create: {
@@ -147,6 +147,15 @@ export const auth = betterAuth({
             }
         })
     ],
+    advanced: {
+        crossSubDomainCookies: {
+            enabled: true,
+        },
+        cookie: {
+            domain: process.env.NODE_ENV === "production" ? "railway.app" : undefined,
+            secure: process.env.NODE_ENV === "production",
+        }
+    }
 });
 
 export const getActivePlanServer = async () => {
