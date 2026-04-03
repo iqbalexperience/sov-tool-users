@@ -297,6 +297,7 @@ model MemberProjects {
   @@map("member_projects")
 }
 
+const 
 model Invitation {
   id             String       @id
   organizationId String
