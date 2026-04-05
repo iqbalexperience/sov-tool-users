@@ -156,9 +156,9 @@ export const auth = betterAuth({
             httpOnly: true,
         },
     },
-    session: {
-        deferSessionRefresh: true
-    }
+    // session: {
+    //     deferSessionRefresh: true
+    // }
 });
 
 export const getActivePlanServer = async () => {
