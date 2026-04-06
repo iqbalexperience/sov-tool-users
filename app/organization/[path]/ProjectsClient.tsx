@@ -139,7 +139,7 @@ export default function ProjectsClient({ userProjects, orgClients, orgId, isOrgA
 
                                             <div className="flex flex-row items-center gap-4">
 
-                                                <Link href={`https://aiseo.inboundcph.dk/project/${client.id}/${project.id}`} target="_blank">
+                                                <Link href={`https://v3-ai-seo-stagging.up.railway.app/project/${client.id}/${project.id}`} target="_blank">
                                                     <Button variant="outline" size="sm" className="rounded-lg h-9 px-4">
                                                         <ExternalLink className="h-4 w-4 mr-2" />
                                                         View

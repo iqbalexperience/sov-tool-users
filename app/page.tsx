@@ -14,7 +14,7 @@ export default async function LandingPage() {
             <RedirectToSignIn />
         )
     }
-    redirect("https://aiseo.inboundcph.dk/")
+    redirect("https://v3-ai-seo-stagging.up.railway.app/")
 
     return (
         <div className="container p-6 mx-auto max-w-4xl">
