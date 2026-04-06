@@ -16,7 +16,7 @@ export const auth = betterAuth({
     database: prismaAdapter(prisma, {
         provider: "postgresql",
     }),
-    trustedOrigins: ["http://localhost:3000", "https://aiseo.inboundcph.dk", "https://8ca8-180-149-219-117.ngrok-free.app", "https://v3-ai-seo-stagging.up.railway.app"],
+    trustedOrigins: ["http://localhost:3000", "https://aiseo.inboundcph.dk", "a9de-180-149-217-221.ngrok-free.app", "https://v3-ai-seo-stagging.up.railway.app"],
     databaseHooks: {
         user: {
             create: {
